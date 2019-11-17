@@ -2,3 +2,5 @@
 ng build ngx-crud
 cd dist/ngx-crud
 npm publish
+ng build --prod sample
+firebase deploy
