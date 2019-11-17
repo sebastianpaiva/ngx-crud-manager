@@ -26,7 +26,7 @@ export class NgxCrudComponent implements OnInit, OnDestroy {
   @Input() items: any[];
   @Input() formGroup: FormGroup;
   @Input() clone = false;
-  @Input() args: any[];
+  @Input() args: any[] = [];
   @Output() back = new EventEmitter();
   error = false;
   formArray: FormArray = new FormArray([]);
@@ -49,6 +49,9 @@ export class NgxCrudComponent implements OnInit, OnDestroy {
   ) {
   }
   ngOnInit() {
+    if (!this.args || !Array.isArray(this.args)) {
+      this.args = [];
+    }
     /*
     const id = this.company.local$.getValue().id;
     this.db.object('company/' + id + '/imports/' + this.service.model).valueChanges().subscribe((value: any) => {

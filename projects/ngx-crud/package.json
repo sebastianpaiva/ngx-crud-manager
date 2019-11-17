@@ -1,7 +1,8 @@
 {
   "name": "ngx-crud-manager",
-  "version": "1.0.5",
+  "version": "1.0.9",
   "author": "Sebastián Paiva",
+  "license": "MIT",
   "repository": {
     "url": "https://github.com/sebastianpaiva/ngx-crud-manager"
   },

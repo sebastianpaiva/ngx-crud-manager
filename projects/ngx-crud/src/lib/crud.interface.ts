@@ -1,8 +1,8 @@
 import {Observable} from 'rxjs';
-import {HttpResponse} from '@angular/common/http';
+import {HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
 
 export interface ICRUDService {
-  index?: (search?: string, page?: number, ...path) => Observable<HttpResponse<PagedResponse | any>>;
+  index?: (search?: string, page?: number, ...args) => Observable<HttpResponse<PagedResponse | any>>;
   get?: (id: number, ...args) => Observable<HttpResponse<any>>;
   create?: (value: any, ...args) => Observable<HttpResponse<any>>;
   update?: (id: number, value: any, ...args) => Observable<HttpResponse<any>>;
@@ -19,4 +19,16 @@ export interface PagedResponse {
   page: number;
   total: number;
   total_pages: number;
+}
+export interface BaseOptions {
+  headers?: HttpHeaders | {
+    [header: string]: string | string[];
+  };
+  observe: 'response';
+  params?: HttpParams | {
+    [param: string]: string | string[];
+  };
+  reportProgress?: boolean;
+  responseType?: 'json';
+  withCredentials?: boolean;
 }

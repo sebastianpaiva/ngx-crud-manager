@@ -1,7 +1,7 @@
 <div class="list" *ngIf="items">
   <div class="item save">
     <span *ngIf="service.swap" class="hint">Arrastre para reordenar</span>
-    <button mat-button (click)="goBack()" *ngIf="args"><i class="fa fa-arrow-left"></i></button>
+    <button mat-button (click)="goBack()" *ngIf="args.length != 0"><i class="fa fa-arrow-left"></i></button>
     <div class="expander"></div>
     <div class="search">
       <i class="fa fa-search"></i>
