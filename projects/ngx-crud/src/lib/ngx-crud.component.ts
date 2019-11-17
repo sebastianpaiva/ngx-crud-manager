@@ -17,7 +17,9 @@ import {NgxCrudForm} from './ngx-crud-form/ngx-crud-form';
 @Component({
   selector: 'ngx-crud-manager',
   templateUrl: './ngx-crud.component.html',
-  styleUrls: ['./ngx-crud.component.styl']
+  styleUrls: [
+    './ngx-crud.component.styl',
+    'styles/material.scss']
 })
 export class NgxCrudComponent implements OnInit, OnDestroy {
   @Input() itemTemplate: TemplateRef<any>;
@@ -92,14 +94,18 @@ export class NgxCrudComponent implements OnInit, OnDestroy {
       this.setupForms();
     }).catch((error) => {
       this.error = true;
+      console.log(error);
+      this.loadingPage = false;
     });
   }
   setupForms() {
-    this.formArray = new FormArray([]);
-    for (const i of this.items) {
-      this.formArray.push(_.cloneDeep(this.formGroup));
+    if (this.formGroup) {
+      this.formArray = new FormArray([]);
+      for (const i of this.items) {
+        this.formArray.push(_.cloneDeep(this.formGroup));
+      }
+      this.formArray.patchValue(this.items);
     }
-    this.formArray.patchValue(this.items);
   }
   toggleEditMode(value) {
     this.matDialog.open(NgxCrudForm, {data: {template: this.formTemplate, form: this.formGroup, value}})

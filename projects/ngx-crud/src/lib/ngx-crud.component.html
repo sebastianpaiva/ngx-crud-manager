@@ -7,7 +7,7 @@
       <i class="fa fa-search"></i>
       <input [formControl]="formSearch">
     </div>
-    <button mat-button color="primary" (click)="addItem()"><i class="fa fa-plus"></i></button>
+    <button mat-button color="primary" (click)="addItem()" *ngIf="formTemplate"><i class="fa fa-plus"></i></button>
     <button mat-button color="primary" (click)="importDefaults()" *ngIf="service.import && !importing" ><i class="fa fa-cloud-download-alt"></i></button>
     <button mat-button color="primary" *ngIf="importing" [matTooltip]="progress+'% - '+current+'/'+total"><i class="fa fa-spin fa-circle-notch"></i></button>
   </div>
@@ -26,12 +26,12 @@
       </div>
       <div class="buttons">
         <button class="button" mat-button color="warn" (click)="cloneItem(item)" [hidden]="item.saving || item.saved || item.error || item.deleted || !clone"><i class="fa fa-copy"></i></button>
-        <button class="button" mat-button color="warn" (click)="toggleEditMode(item)" [hidden]="item.saving || item.saved || item.error || item.deleted"><i class="fa fa-pencil-alt"></i></button>
-        <button class="button" mat-button color="warn" (click)="destroyItem(item)" [hidden]="item.saving || item.saved || item.error || item.deleted"><i class="fa fa-trash"></i></button>
+        <button class="button" mat-button color="warn" (click)="toggleEditMode(item)" [hidden]="item.saving || item.saved || item.error || item.deleted" *ngIf="service.update"><i class="fa fa-pencil-alt"></i></button>
+        <button class="button" mat-button color="warn" (click)="destroyItem(item)" [hidden]="item.saving || item.saved || item.error || item.deleted" *ngIf="service.destroy"><i class="fa fa-trash"></i></button>
         <button class="button" mat-button [hidden]="!item.saving"><i class="fa fa-spin fa-circle-notch"></i></button>
         <button class="button" mat-button [hidden]="!item.saved"><i class="fa fa-check"></i></button>
         <button class="button" mat-button [hidden]="!item.error"><i class="fa fa-times"></i></button>
-        <button class="button" mat-button [hidden]="item.saving || !item.deleted || item.error" (click)="restoreItem(item)"><i class="fa fa-undo"></i></button>
+        <button class="button" mat-button [hidden]="item.saving || !item.deleted || item.error" (click)="restoreItem(item)" *ngIf="service.restore"><i class="fa fa-undo"></i></button>
       </div>
     </div>
     <div class="item last" *ngIf="items.length == 0">

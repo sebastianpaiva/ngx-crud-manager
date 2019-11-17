@@ -11,10 +11,15 @@ Simple and Customizable Interface to List, Create, Edit, Delete, Restore, Swap, 
 
 # Usage
 ## Installation
-Install:
-```
+Install package:
+
+`
 npm install --save ngx-crud-manager
-```
+`
+
+Add Angular Material (skip if you already installed it):
+
+`ng add @angular/material`
 
 ## Setup
 Just import the module to your app.module.ts
@@ -32,44 +37,62 @@ In order to make our interface work with your api, you need to declare a service
 
 The library also has a SetupParams function in order to make things easier for you.
 
+Make sure you have HttpClientModule and RouterModule.forRoot() imported.
+
 **item.service.ts**
 
 ```
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
-export class ItemService implements ICRUDService{
-  apiUrl = "localhost:3000/api"
-  constructor(private http:HttpClient) {
-    
+export class ItemService implements ICRUDService {
+  apiUrl = 'http://localhost:3000/api';
+  constructor(private http: HttpClient) {
+
   }
-  index(value = null,page = 1){
-    return this.http.get(this.apiUrl+'/items',SetupParams({search: value, page: page}));
+  index(value = null, page = 1){
+    return this.http.get(this.apiUrl + '/items', SetupParams({search: value, page}));
   }
-  create(value){
-    return this.http.post(this.apiUrl+'/items',{
+  create(value) {
+    return this.http.post(this.apiUrl + '/items', {
       item: value
-    },SetupParams());
+    }, SetupParams());
   }
-  update(id,value){
-    return this.http.update(this.apiUrl+'/items',{
+  update(id, value) {
+    return this.http.put(this.apiUrl + '/items', {
       item: value
-    },SetupParams());
+    }, SetupParams());
   }
-  destroy(id){
-    return this.http.delete(this.apiUrl+'/items/'+id,SetupParams());
+  destroy(id) {
+    return this.http.delete(this.apiUrl + '/items/' + id, SetupParams());
   }
-  restore(id){
-    return this.http.delete(this.apiUrl+'/items/'+id+'/restore',SetupParams());
+  restore(id) {
+    return this.http.delete(this.apiUrl + '/items/' + id + '/restore', SetupParams());
   }
+}
 ```
 
 ## Adding the interface to a component
 
-**items.component.html**
+**app.component.html**
 
 ```
+<ngx-crud-manager [service]="itemService"></ngx-crud-manager>
+```
 
+**app.component.ts**
+
+```
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  constructor(public itemService: ItemService){
+
+  }
+}
 ```
 
 

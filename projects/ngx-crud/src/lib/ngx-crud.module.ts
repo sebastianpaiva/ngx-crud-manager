@@ -1,4 +1,4 @@
-import {ComponentFactoryResolver, ModuleWithProviders, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import { NgxCrudComponent } from './ngx-crud.component';
 import {MatButtonModule, MatDialogModule, MatPaginatorModule, MatProgressSpinnerModule, MatTooltipModule} from '@angular/material';
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -26,7 +26,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     DragDropModule,
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     // COMPONENTS

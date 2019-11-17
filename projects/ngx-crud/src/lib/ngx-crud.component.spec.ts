@@ -1,8 +1,8 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {NgxCrudComponent} from './admin-lists.component';
+import {NgxCrudComponent} from './ngx-crud.component';
 
-describe('AdminListsComponent', () => {
+describe('NgxCrudComponent', () => {
   let component: NgxCrudComponent;
   let fixture: ComponentFixture<NgxCrudComponent>;
 
