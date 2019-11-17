@@ -1,6 +1,10 @@
 {
   "name": "ngx-crud-manager",
-  "version": "1.0.1",
+  "version": "1.0.2",
+  "author": "Sebastián Paiva",
+  "repository": {
+    "url": "https://github.com/sebastianpaiva/ngx-crud-manager"
+  },
   "peerDependencies": {
     "@angular/common": ">= 6",
     "@angular/core": ">= 6",
