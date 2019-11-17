@@ -1,0 +1,7 @@
+<div class="form cc-dark" *ngIf="formGroup && formTemplate">
+  <ng-container
+    *ngTemplateOutlet="formTemplate; context: {form: formGroup, value: formValue}">
+  </ng-container>
+  <button type="submit" mat-raised-button (click)="sendForm()" color="primary" [disabled]="!formGroup.valid">Guardar</button>
+</div>
+

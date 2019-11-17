@@ -1,0 +1,4 @@
+#!/bin/bash
+ng build ngx-crud
+cd dist/ngx-crud
+npm publish

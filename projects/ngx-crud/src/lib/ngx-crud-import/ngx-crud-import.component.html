@@ -1,0 +1,14 @@
+<div class="filters">
+  <div class="title"><span>Seleccione colecciones a importar</span></div>
+  <div class="wrapper">
+    <button mat-button class="option" *ngFor="let item of items" (click)="setItem(item)">
+      <span class="name">{{item.name}}</span>
+      <i class="fa fa-check-square" [hidden]="!itemSelected(item)"></i>
+      <i class="fa fa-square" [hidden]="itemSelected(item)"></i>
+    </button>
+    <button mat-button class="option" *ngIf="items.length === 0">
+      <span class="name">No hay colecciones para importar</span>
+    </button>
+  </div>
+  <button mat-raised-button color="accent" (click)="import()">Importar</button>
+</div>

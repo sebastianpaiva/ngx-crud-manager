@@ -1,0 +1,52 @@
+<div class="list" *ngIf="items">
+  <div class="item save">
+    <span *ngIf="service.swap" class="hint">Arrastre para reordenar</span>
+    <button mat-button (click)="goBack()" *ngIf="args"><i class="fa fa-arrow-left"></i></button>
+    <div class="expander"></div>
+    <div class="search">
+      <i class="fa fa-search"></i>
+      <input [formControl]="formSearch">
+    </div>
+    <button mat-button color="primary" (click)="addItem()"><i class="fa fa-plus"></i></button>
+    <button mat-button color="primary" (click)="importDefaults()" *ngIf="service.import && !importing" ><i class="fa fa-cloud-download-alt"></i></button>
+    <button mat-button color="primary" *ngIf="importing" [matTooltip]="progress+'% - '+current+'/'+total"><i class="fa fa-spin fa-circle-notch"></i></button>
+  </div>
+  <div class="loading-overlay" [hidden]="!loadingPage">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div class="wrapper items" cdkDropList (cdkDropListDropped)="drop($event)">
+    <div class="item" *ngFor="let item of items; let index = index; let last = last" [class.last]="last" cdkDrag>
+      <div class="content dropable" [hidden]="item.editMode">
+        <ng-template #defaultItemTemplate>
+          {{item.name}}
+        </ng-template>
+        <ng-container
+          *ngTemplateOutlet="itemTemplate ? itemTemplate : defaultItemTemplate;context: {$implicit: item}">
+        </ng-container>
+      </div>
+      <div class="buttons">
+        <button class="button" mat-button color="warn" (click)="cloneItem(item)" [hidden]="item.saving || item.saved || item.error || item.deleted || !clone"><i class="fa fa-copy"></i></button>
+        <button class="button" mat-button color="warn" (click)="toggleEditMode(item)" [hidden]="item.saving || item.saved || item.error || item.deleted"><i class="fa fa-pencil-alt"></i></button>
+        <button class="button" mat-button color="warn" (click)="destroyItem(item)" [hidden]="item.saving || item.saved || item.error || item.deleted"><i class="fa fa-trash"></i></button>
+        <button class="button" mat-button [hidden]="!item.saving"><i class="fa fa-spin fa-circle-notch"></i></button>
+        <button class="button" mat-button [hidden]="!item.saved"><i class="fa fa-check"></i></button>
+        <button class="button" mat-button [hidden]="!item.error"><i class="fa fa-times"></i></button>
+        <button class="button" mat-button [hidden]="item.saving || !item.deleted || item.error" (click)="restoreItem(item)"><i class="fa fa-undo"></i></button>
+      </div>
+    </div>
+    <div class="item last" *ngIf="items.length == 0">
+      <div class="content">
+        No hay items en esta lista. <div class="defaults" (click)="importDefaults()" *ngIf="service.import">Importar valores por defecto</div>
+      </div>
+    </div>
+  </div>
+  <div class="paginator">
+    <mat-paginator [length]="totalItems" [pageSize]="PAGE_SIZE" (page)="setPage($event)"></mat-paginator>
+  </div>
+</div>
+<div class="loading" *ngIf="!items && !error">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="error" *ngIf="!items && error">
+  <i class="fa fa-warning"></i> A ocurrido un error mientras se procesaba esta lista.
+</div>
