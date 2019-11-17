@@ -97,15 +97,15 @@ export class AppComponent {
 
 ### Adding a custom form
 
-Using FormBuilder we create a new FormGroup
+Using ReactiveForms we create a new Form with our required fields
 
 **app.component.ts**
 
 ```
 export class AppComponent {
-  formGroup = this.fb.group({
-    name: ''
-  })
+  formGroup = new FormGroup({
+      name: new FormControl('', Validators.required)
+    });
   constructor(
     public itemService: ItemService,
     private fb: FormBuilder,
@@ -115,7 +115,76 @@ export class AppComponent {
 }
 ```
 
-Then we add our form template to the component
+Then we add our form template to the component and setup our crud manager **formTemplate** and **formGroup** values
+
+**app.component.html**
+
+```
+<ngx-crud-manager [service]="itemService" [formTemplate]="formTemplate" [formGroup]="formGroup"></ngx-crud-manager>
+
+<ng-template #formTemplate let-form="form">
+  <form [formGroup]="form">
+    <mat-form-field>
+      <input matInput type="text" placeholder="Item Name" required formControlName="name" name="name">
+    </mat-form-field>
+  </form>
+</ng-template>
+```
+
+### Setting a custom list item display
+
+We create a item template and setup it in the crud manager
+
+```
+<ng-template #itemTemplate let-item>
+  <span>{{item.id}} - {{item.name}}</span>
+</ng-template>
+<ngx-crud-manager [service]="itemService" [itemTemplate]="itemTemplate"></ngx-crud-manager>
+```
+
+### Nested Routes
+
+If you have routes like /collection/:id/items you can add arguments to the manager
+
+app.component.html
+```
+<ngx-crud-manager [service]="itemService" [formTemplate]="formTemplate" [formGroup]="formGroup" [args]=[collection.id]></ngx-crud-manager>
+```
+
+CRUD Manager with call your service with aditional arguments
+
+item.service.ts
+```
+create(value,collection_id) {
+    return this.http.post(this.apiUrl + 'collection/'+collection_id+'/items', {
+      item: value
+    }, SetupParams());
+  }
+```
+
+You can use this to add custom params
+
+app.component.html
+```
+<ngx-crud-manager [service]="itemService" [formTemplate]="formTemplate" [formGroup]="formGroup" [args]=[collection.id,{token: token}]></ngx-crud-manager>
+```
+item.service.ts
+```
+create(value,collection_id,params) {
+    return this.http.post(this.apiUrl + 'collection/'+collection_id+'/items', {
+      item: value
+    }, SetupParams(params));
+  }
+```
+
+## Demo
+
+You can use the manager [here](https://ngx-crud-manager.firebaseapp.com)
+
+### Feel free to fork and improve this.
+
+
+
 
 
 

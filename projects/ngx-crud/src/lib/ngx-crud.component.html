@@ -36,7 +36,7 @@
     </div>
     <div class="item last" *ngIf="items.length == 0">
       <div class="content">
-        No hay items en esta lista. <div class="defaults" (click)="importDefaults()" *ngIf="service.import">Importar valores por defecto</div>
+        No items. <div class="defaults" (click)="importDefaults()" *ngIf="service.import">Import default values</div>
       </div>
     </div>
   </div>
@@ -48,5 +48,5 @@
   <mat-spinner></mat-spinner>
 </div>
 <div class="error" *ngIf="!items && error">
-  <i class="fa fa-warning"></i> A ocurrido un error mientras se procesaba esta lista.
+  <i class="fa fa-warning"></i> An unexpected error ocurred.
 </div>
