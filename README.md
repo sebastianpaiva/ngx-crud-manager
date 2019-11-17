@@ -31,7 +31,7 @@ imports: [
 ]
 ```
 
-## Creating your first CRUD Service
+### Creating your first CRUD Service
 
 In order to make our interface work with your api, you need to declare a service with the ICRUDService Methods.
 
@@ -72,7 +72,7 @@ export class ItemService implements ICRUDService {
 }
 ```
 
-## Adding the interface to a component
+### Adding the interface to a component
 
 **app.component.html**
 
@@ -94,6 +94,29 @@ export class AppComponent {
   }
 }
 ```
+
+### Adding a custom form
+
+Using FormBuilder we create a new FormGroup
+
+**app.component.ts**
+
+```
+export class AppComponent {
+  formGroup = this.fb.group({
+    name: ''
+  })
+  constructor(
+    public itemService: ItemService,
+    private fb: FormBuilder,
+  ) {
+
+  }
+}
+```
+
+Then we add our form template to the component
+
 
 
 

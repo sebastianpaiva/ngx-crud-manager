@@ -10,7 +10,7 @@ import {ActivatedRoute} from '@angular/router';
 import {moveItemInArray} from '@angular/cdk/drag-drop';
 import {NgxCrudImportComponent} from './ngx-crud-import/ngx-crud-import.component';
 import {first} from 'rxjs/operators';
-import {NgxCrudForm} from './ngx-crud-form/ngx-crud-form';
+import {NgxCrudFormComponent} from './ngx-crud-form/ngx-crud-form.component';
 // import {AngularFireDatabase} from '@angular/fire/database';
 // import {AdminService} from '../../services/admin.service';
 
@@ -108,7 +108,7 @@ export class NgxCrudComponent implements OnInit, OnDestroy {
     }
   }
   toggleEditMode(value) {
-    this.matDialog.open(NgxCrudForm, {data: {template: this.formTemplate, form: this.formGroup, value}})
+    this.matDialog.open(NgxCrudFormComponent, {data: {template: this.formTemplate, form: this.formGroup, value}})
       .afterClosed().toPromise().then((result: any) => {
         if (result) {
           this.updateItem(value, result);
@@ -134,7 +134,7 @@ export class NgxCrudComponent implements OnInit, OnDestroy {
     value.deleted = !value.deleted;
   }
   addItem() {
-    this.matDialog.open(NgxCrudForm, {data: {template: this.formTemplate, form: this.formGroup}})
+    this.matDialog.open(NgxCrudFormComponent, {data: {template: this.formTemplate, form: this.formGroup}})
       .afterClosed().toPromise().then((value) => {
         if (value) {
           this.createItem(value);
@@ -143,8 +143,9 @@ export class NgxCrudComponent implements OnInit, OnDestroy {
   }
   createItem(value) {
     const index = this.items.push(value) - 1;
+    const saveItem = _.cloneDeep(value);
     this.toggleSaving(this.items[index]);
-    this.service.create(value, ...this.args).toPromise().then((response: HttpResponse<any>) => {
+    this.service.create(saveItem, ...this.args).toPromise().then((response: HttpResponse<any>) => {
       this.toggleSaving(this.items[index]);
       this.items[index] = response.body;
       this.toggleSave(this.items[index]);

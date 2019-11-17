@@ -12,7 +12,7 @@ export class ItemService implements ICRUDService {
   constructor(private http: HttpClient) {
 
   }
-  index(value = null, page = 1){
+  index(value = null, page = 1) {
     return this.http.get(this.apiUrl + '/items', SetupParams({search: value, page}));
   }
   create(value) {

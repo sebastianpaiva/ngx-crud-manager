@@ -1,2 +1,13 @@
 <h1>CRUD</h1>
-<ngx-crud-manager [service]="itemService"></ngx-crud-manager>
+<ngx-crud-manager [service]="itemService" [formTemplate]="formTemplate" [formGroup]="formGroup">
+</ngx-crud-manager>
+
+<ng-template #formTemplate let-form="form">
+  <form [formGroup]="form">
+    <mat-form-field>
+      <input matInput type="text" placeholder="Nombre" required formControlName="name" name="name">
+    </mat-form-field>
+  </form>
+</ng-template>
+
+

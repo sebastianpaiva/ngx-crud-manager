@@ -37,15 +37,15 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     function createItem() {
       const item = body.item;
       item.id = items.length ? Math.max(...items.map(x => x.id)) + 1 : 1;
-      items.push(item);
+      items.push({id: item.id, name: item.name});
       localStorage.setItem('items', JSON.stringify(items));
 
-      return ok();
+      return ok(item);
     }
 
     function getItems() {
       return ok({
-        items,
+        items: [...items],
         page: 1,
         total_pages: 1,
         total: items.length

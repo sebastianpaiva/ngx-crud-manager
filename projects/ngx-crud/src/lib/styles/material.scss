@@ -25,12 +25,23 @@ $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $warn);
 :host{
   background-color: mat-color($mat-light-theme-background,background) !important;
   color: mat-color($mat-light-theme-foreground,text) !important;
-  border: 1px solid mat-color($mat-light-theme-foreground,slider-off);
+  &.bordered{
+    border: 1px solid mat-color($mat-light-theme-foreground,slider-off);
+  }
   .wrapper{
     border-bottom: 1px solid mat-color($mat-light-theme-foreground,slider-off);
   }
+  .item{
+    border-bottom: 1px solid mat-color($mat-light-theme-foreground,slider-off);
+    &.last{
+      border-bottom: none;
+    }
+  }
   .save, .save:hover{
-    background-color:  mat-color($primary, text);
+    background-color:  mat-color($primary, default);
     color: mat-color($mat-light-theme-foreground,text) !important;
+    .fa{
+      color: mat-color($accent,default) !important;
+    }
   }
 }

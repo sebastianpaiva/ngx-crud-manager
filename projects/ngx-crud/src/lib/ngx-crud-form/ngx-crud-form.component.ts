@@ -6,15 +6,15 @@ import * as _ from 'lodash';
 @Component({
   selector: 'ngx-crud-manager-form',
   templateUrl: './ngx-crud-form.component.html',
-  styleUrls: ['./ngx-crud-form.component.styl']
+  styleUrls: ['./ngx-crud-form.component.styl', '../styles/material.scss']
 })
-export class NgxCrudForm implements OnInit {
+export class NgxCrudFormComponent implements OnInit {
   formTemplate: TemplateRef<any>;
   formGroup: FormGroup;
   formValue: any;
   constructor(
     @Inject(MAT_DIALOG_DATA) private data,
-    private matDialogRef: MatDialogRef<NgxCrudForm>,
+    private matDialogRef: MatDialogRef<NgxCrudFormComponent>,
     private change: ChangeDetectorRef
   ) {
     this.formGroup = _.cloneDeep(data.form);

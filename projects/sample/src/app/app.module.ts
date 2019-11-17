@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {RouterModule} from '@angular/router';
 import {fakeBackendProvider} from './fake-backend';
 import {NgxCrudModule} from '../../../ngx-crud/src/lib/ngx-crud.module';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatInput, MatInputModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,9 @@ import {NgxCrudModule} from '../../../ngx-crud/src/lib/ngx-crud.module';
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    FormsModule,
     NgxCrudModule,
     RouterModule.forRoot([])
   ],
