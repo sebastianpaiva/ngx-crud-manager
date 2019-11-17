@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, TemplateRef} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
 import * as _ from 'lodash';
 import {ICRUDService, PagedResponse} from './crud.interface';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
@@ -11,6 +11,7 @@ import {moveItemInArray} from '@angular/cdk/drag-drop';
 import {NgxCrudImportComponent} from './ngx-crud-import/ngx-crud-import.component';
 import {first} from 'rxjs/operators';
 import {NgxCrudFormComponent} from './ngx-crud-form/ngx-crud-form.component';
+import {element} from 'protractor';
 // import {AngularFireDatabase} from '@angular/fire/database';
 // import {AdminService} from '../../services/admin.service';
 
@@ -22,6 +23,8 @@ import {NgxCrudFormComponent} from './ngx-crud-form/ngx-crud-form.component';
     'styles/material.scss']
 })
 export class NgxCrudComponent implements OnInit, OnDestroy {
+  @ViewChild('infiniteScroll', {static: false}) infiniteScroll;
+  @ViewChild('loadMore', {static: false}) loadMore;
   @Input() itemTemplate: TemplateRef<any>;
   @Input() formTemplate: TemplateRef<any>;
   @Input() service: ICRUDService;
@@ -29,13 +32,15 @@ export class NgxCrudComponent implements OnInit, OnDestroy {
   @Input() formGroup: FormGroup;
   @Input() clone = false;
   @Input() args: any[] = [];
+  @Input() PAGE_SIZE = 25;
   @Output() back = new EventEmitter();
   error = false;
+  loadingMore = false;
+  canLoadMore = true;
   formArray: FormArray = new FormArray([]);
   formSearch: FormControl = new FormControl('');
   formSearchSub: Subscription;
   totalItems = 0;
-  PAGE_SIZE = 25;
   page = 1;
   private searchOBS: Subscription;
   importing = false;
@@ -75,6 +80,8 @@ export class NgxCrudComponent implements OnInit, OnDestroy {
       }
     });
     */
+    // SETUP SCROLLER
+    this.loadMoreItems();
     if (!this.items) {
       this.loadItems(1);
     }
@@ -86,16 +93,41 @@ export class NgxCrudComponent implements OnInit, OnDestroy {
     this.loadItems(page.pageIndex + 1);
   }
   loadItems(page) {
-    this.loadingPage = true;
+    if (this.page === 1) {
+      this.loadingPage = true;
+    }
     this.service.index(this.formSearch.value, page, ...this.args).toPromise().then((response: HttpResponse<PagedResponse>) => {
-      this.items = response.body.items;
+      if (this.page !== 1) {
+        this.items = this.items.concat(response.body.items);
+      }else {
+        this.items = response.body.items;
+      }
       this.totalItems = response.body.total_pages * this.PAGE_SIZE;
       this.loadingPage = false;
+      this.loadingMore = false;
+      if (this.items.length < this.page * this.PAGE_SIZE) {
+        this.canLoadMore = false;
+      }
       this.setupForms();
     }).catch((error) => {
       this.error = true;
       console.log(error);
       this.loadingPage = false;
+    });
+  }
+  loadMoreItems() {
+    interval(500).subscribe(() => {
+      if (!this.loadingMore && this.canLoadMore) {
+        if (this.infiniteScroll && this.loadMore) {
+          const element = this.infiniteScroll.nativeElement;
+          const loaderElement = this.loadMore.nativeElement;
+          if (element.scrollTop + element.clientHeight > element.scrollHeight - loaderElement.clientHeight){
+            this.loadingMore = true;
+            this.page++;
+            this.loadItems(this.page);
+          }
+        }
+      }
     });
   }
   setupForms() {

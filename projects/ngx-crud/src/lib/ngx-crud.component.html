@@ -14,7 +14,7 @@
   <div class="loading-overlay" [hidden]="!loadingPage">
     <mat-spinner></mat-spinner>
   </div>
-  <div class="wrapper items" cdkDropList (cdkDropListDropped)="drop($event)">
+  <div class="wrapper items" cdkDropList (cdkDropListDropped)="drop($event)" #infiniteScroll>
     <div class="item" *ngFor="let item of items; let index = index; let last = last" [class.last]="last" cdkDrag>
       <div class="content dropable" [hidden]="item.editMode">
         <ng-template #defaultItemTemplate>
@@ -38,6 +38,9 @@
       <div class="content">
         No items. <div class="defaults" (click)="importDefaults()" *ngIf="service.import">Import default values</div>
       </div>
+    </div>
+    <div class="item load-more" [hidden]="!canLoadMore" #loadMore>
+      <mat-spinner [diameter]="20"></mat-spinner> Loading More
     </div>
   </div>
   <div class="paginator">

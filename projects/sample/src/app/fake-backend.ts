@@ -44,8 +44,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 
     function getItems() {
+      const page = parseInt(request.params.get('page'),0);
+      const pageSize = 5;
+      const start = (page - 1) * pageSize
+      const pagedItems = [...items].slice(start, start + pageSize);
       return ok({
-        items: [...items],
+        items: [...pagedItems],
         page: 1,
         total_pages: 1,
         total: items.length
