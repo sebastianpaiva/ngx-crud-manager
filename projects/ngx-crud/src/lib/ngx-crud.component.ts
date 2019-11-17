@@ -26,7 +26,7 @@ export class NgxCrudComponent implements OnInit, OnDestroy {
   @Input() items: any[];
   @Input() formGroup: FormGroup;
   @Input() clone = false;
-  @Input() args;
+  @Input() args: any[];
   @Output() back = new EventEmitter();
   error = false;
   formArray: FormArray = new FormArray([]);
@@ -35,14 +35,12 @@ export class NgxCrudComponent implements OnInit, OnDestroy {
   totalItems = 0;
   PAGE_SIZE = 25;
   page = 1;
-  private searchOBS: any;
-  private paramsOBS: any;
+  private searchOBS: Subscription;
   importing = false;
   loadingPage = false;
   progress = 0;
   current = 0;
   total = 0;
-  urlParams = [];
   constructor(
     private matDialog: MatDialog,
     private route: ActivatedRoute,
@@ -72,12 +70,6 @@ export class NgxCrudComponent implements OnInit, OnDestroy {
       }
     });
     */
-    this.paramsOBS = this.route.params.subscribe((values) => {
-      this.urlParams = Object.keys(values).reduce((p, c) => {p.push(values[c]); return p; }, []);
-      if (this.urlParams.length === 0 && this.args) {
-        this.urlParams = this.args;
-      }
-    });
     if (!this.items) {
       this.loadItems(1);
     }
@@ -90,7 +82,7 @@ export class NgxCrudComponent implements OnInit, OnDestroy {
   }
   loadItems(page) {
     this.loadingPage = true;
-    this.service.index(this.formSearch.value, page, ...this.urlParams).toPromise().then((response: HttpResponse<PagedResponse>) => {
+    this.service.index(this.formSearch.value, page, ...this.args).toPromise().then((response: HttpResponse<PagedResponse>) => {
       this.items = response.body.items;
       this.totalItems = response.body.total_pages * this.PAGE_SIZE;
       this.loadingPage = false;
@@ -143,7 +135,7 @@ export class NgxCrudComponent implements OnInit, OnDestroy {
   createItem(value) {
     const index = this.items.push(value) - 1;
     this.toggleSaving(this.items[index]);
-    this.service.create(value, ...this.urlParams).toPromise().then((response: HttpResponse<any>) => {
+    this.service.create(value, ...this.args).toPromise().then((response: HttpResponse<any>) => {
       this.toggleSaving(this.items[index]);
       this.items[index] = response.body;
       this.toggleSave(this.items[index]);
@@ -157,7 +149,7 @@ export class NgxCrudComponent implements OnInit, OnDestroy {
   }
   destroyItem(value) {
     this.toggleSaving(value);
-    this.service.destroy(value.id, ...this.urlParams).toPromise().then(() => {
+    this.service.destroy(value.id, ...this.args).toPromise().then(() => {
       this.toggleSaving(value);
       this.toggleDeleted(value);
       setTimeout(() => {
@@ -170,7 +162,7 @@ export class NgxCrudComponent implements OnInit, OnDestroy {
   }
   updateItem(value, formValue) {
     this.toggleSaving(value);
-    this.service.update(value.id, formValue, ...this.urlParams).toPromise().then((response: HttpResponse<any | any[]>) => {
+    this.service.update(value.id, formValue, ...this.args).toPromise().then((response: HttpResponse<any | any[]>) => {
       _.merge(value, response.body); // UPDATE VALUES
       this.toggleSaving(value);
       this.toggleSave(value);
@@ -182,7 +174,7 @@ export class NgxCrudComponent implements OnInit, OnDestroy {
   cloneItem(value) {
     this.toggleSaving(value);
     const index = this.items.findIndex((i) => i.id === value.id) + 1;
-    this.service.clone(value.id, ...this.urlParams).toPromise().then((response: HttpResponse<any>) => {
+    this.service.clone(value.id, ...this.args).toPromise().then((response: HttpResponse<any>) => {
       this.items.splice(index, 0, response.body);
       this.toggleSaving(value);
     }).catch((error) => {
@@ -192,7 +184,7 @@ export class NgxCrudComponent implements OnInit, OnDestroy {
   }
   restoreItem(value) {
     this.toggleSaving(value);
-    this.service.restore(value.id, ...this.urlParams).toPromise().then(() => {
+    this.service.restore(value.id, ...this.args).toPromise().then(() => {
       this.toggleSaving(value);
       this.toggleDeleted(value);
       // this.items.splice(this.items.findidIndex((i) => i.id===value.id),1);
@@ -214,11 +206,11 @@ export class NgxCrudComponent implements OnInit, OnDestroy {
   }
   importDefaults() {
     this.loadingPage = true;
-    this.service.import(null, ...this.urlParams).toPromise().then((response: HttpResponse<any[]>) => {
+    this.service.import(null, ...this.args).toPromise().then((response: HttpResponse<any[]>) => {
       this.loadingPage = false;
       this.matDialog.open(NgxCrudImportComponent, {data: response.body}).afterClosed().pipe(first()).forEach((values) => {
         if (values && values.length !== 0) {
-          this.service.import(values, ...this.urlParams).toPromise().then((responseImport: HttpResponse<any[]>) => {
+          this.service.import(values, ...this.args).toPromise().then((responseImport: HttpResponse<any[]>) => {
             this.importing = true;
           }).catch((error) => {
             this.loadingPage = false;
@@ -244,6 +236,8 @@ export class NgxCrudComponent implements OnInit, OnDestroy {
     }
   }
   ngOnDestroy() {
-    this.formSearchSub.unsubscribe();
+    if (this.formSearchSub) {
+      this.formSearchSub.unsubscribe();
+    }
   }
 }
