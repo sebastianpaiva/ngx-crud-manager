@@ -1,8 +1,15 @@
 {
   "name": "ngx-crud-manager",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "author": "Sebastián Paiva",
   "license": "MIT",
+  "keywords": [
+    "crud",
+    "angular",
+    "ngx",
+    "ng",
+    "datatable",
+    "create","update","orderable","table","destroy","restore","rest","restful","material"],
   "repository": {
     "url": "https://github.com/sebastianpaiva/ngx-crud-manager"
   },
