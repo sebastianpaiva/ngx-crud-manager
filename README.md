@@ -203,30 +203,30 @@ export class DynamicService implements ICRUDService {
 
   }
   index(value = null, page = 1, endpoint) {
-    return this.http.get(this.apiUrl + `/${endpoint}` SetupParams({search: value, page}));
+    return this.http.get(this.apiUrl + `/${endpoint}`, SetupParams({search: value, page}));
   }
   create(value, endpoint) {
-    return this.http.post(this.apiUrl + `/${endpoint}` {
+    return this.http.post(this.apiUrl + `/${endpoint}`, {
       item: value
     }, SetupParams());
   }
   update(id, value, endpoint) {
-    return this.http.put(this.apiUrl + `/${endpoint}` {
+    return this.http.put(this.apiUrl + `/${endpoint}`, {
       item: value
     }, SetupParams());
   }
   destroy(id, endpoint) {
-    return this.http.delete(this.apiUrl + `/${endpoint}` + id, SetupParams());
+    return this.http.delete(this.apiUrl + `/${endpoint}/` + id, SetupParams());
   }
   restore(id, endpoint) {
-    return this.http.delete(this.apiUrl + `/${endpoint}` + id + '/restore', SetupParams());
+    return this.http.delete(this.apiUrl + `/${endpoint}/` + id + '/restore', SetupParams());
   }
 }
 ```
 
 ## Backend required responses
 
-You can use any method URL and request format, since you can configure it in your service, the only real requirement is your backend response
+You can use any Url and request format since you can configure it in your service, the only real requirement is your backend response
 
 | URL | SERVICE METHOD | REQUEST | RESPONSE | CODE |
 |---|---|---|---|---|
