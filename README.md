@@ -2,12 +2,17 @@
 
 ## Description
 
-Simple and Customizable Interface to List, Create, Edit, Delete, Restore, Swap, and Import Items.
+Simple and Customizable CRUD interface for RESTful APIs, with the adition of Restore, Search, Clone, Order and Infinite Scroll Functions.
+
 
 [![Travis CI](https://travis-ci.org/sebastianpaiva/ngx-crud-manager.svg?branch=master)](https://travis-ci.org/sebastianpaiva/ngx-crud-manager)
 [![Latest Stable Version](https://img.shields.io/npm/v/ngx-crud-manager.svg)](https://www.npmjs.com/package/ngx-crud-manager/core)
 [![License](https://img.shields.io/npm/l/ngx-crud-manager.svg)](https://www.npmjs.com/package/ngx-crud-manager)
 [![NPM Downloads](https://img.shields.io/npm/dm/ngx-crud-manager.svg)](https://www.npmjs.com/package/ngx-crud-manager)
+
+# Demo
+
+You can use the manager [here](https://ngx-crud-manager.firebaseapp.com)
 
 # Usage
 ## Installation
@@ -177,9 +182,63 @@ create(value,collection_id,params) {
   }
 ```
 
-## Demo
+### Using a dynamic service
 
-You can use the manager [here](https://ngx-crud-manager.firebaseapp.com)
+Setup as argument the Restful api endpoint and provide to you service.
+
+app.component.html
+```
+<ngx-crud-manager [service]="itemService" [formTemplate]="formTemplate" [formGroup]="formGroup" [args]=[endpoint]></ngx-crud-manager>
+```
+
+dynamic.service.ts
+
+```
+@Injectable({
+  providedIn: 'root'
+})
+export class DynamicService implements ICRUDService {
+  apiUrl = 'http://localhost:3000/api';
+  constructor(private http: HttpClient) {
+
+  }
+  index(value = null, page = 1, endpoint) {
+    return this.http.get(this.apiUrl + `/${endpoint}` SetupParams({search: value, page}));
+  }
+  create(value, endpoint) {
+    return this.http.post(this.apiUrl + `/${endpoint}` {
+      item: value
+    }, SetupParams());
+  }
+  update(id, value, endpoint) {
+    return this.http.put(this.apiUrl + `/${endpoint}` {
+      item: value
+    }, SetupParams());
+  }
+  destroy(id, endpoint) {
+    return this.http.delete(this.apiUrl + `/${endpoint}` + id, SetupParams());
+  }
+  restore(id, endpoint) {
+    return this.http.delete(this.apiUrl + `/${endpoint}` + id + '/restore', SetupParams());
+  }
+}
+```
+
+## Backend required responses
+
+You can use any method URL and request format, since you can configure it in your service, the only real requirement is your backend response
+
+| URL | SERVICE METHOD | REQUEST | RESPONSE | CODE |
+|---|---|---|---|---|
+| GET /items | **index** | {page: **number**, search: **string**}| items[{id:**number**}] | 200 |
+| POST /items | **create** | {item: any} | {id: **number**, ...item} | 200-201 |
+| PUT /items/:id | **update** | {id: **number**, item: **any**} |  {id: **number**, ...item}| 200 |
+| DELETE /items/:id | **destroy** | {id: **number**} | **any** | 200 |
+| PATCH /items/:id/restore | **restore** | {id: **number**} | **any** | 200 |
+| POST /items/:id/clone | **clone** | {id: **number**} | {id: **number**, ...item} | 200 |
+| POST /items/swap | **swap** | {ordered_ids: **number[]**} | any | 200 |
+
+
 
 ### Feel free to fork and improve this.
 

@@ -96,13 +96,21 @@ export class NgxCrudComponent implements OnInit, OnDestroy {
     if (this.page === 1) {
       this.loadingPage = true;
     }
-    this.service.index(this.formSearch.value, page, ...this.args).toPromise().then((response: HttpResponse<PagedResponse>) => {
-      if (this.page !== 1) {
-        this.items = this.items.concat(response.body.items);
-      }else {
-        this.items = response.body.items;
+    this.service.index(this.formSearch.value, page, ...this.args).toPromise().then((response: HttpResponse<PagedResponse | any>) => {
+      if (response.body.items) {
+        if (this.page !== 1) {
+          this.items = this.items.concat(response.body.items);
+        }else {
+          this.items = response.body.items;
+        }
+        this.totalItems = response.body.total_pages * this.PAGE_SIZE;
+      } else {
+        if (this.page !== 1) {
+          this.items = this.items.concat(response.body);
+        }else {
+          this.items = response.body;
+        }
       }
-      this.totalItems = response.body.total_pages * this.PAGE_SIZE;
       this.loadingPage = false;
       this.loadingMore = false;
       if (this.items.length < this.page * this.PAGE_SIZE) {

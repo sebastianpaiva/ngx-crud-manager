@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
+import {VALUES} from './item';
 
 // array in local storage for registered items
-let items = JSON.parse(localStorage.getItem('items')) || [{id: 1, name: 'Teclado'}];
+let items = JSON.parse(localStorage.getItem('items')) || VALUES;
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -48,12 +49,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       const pageSize = 5;
       const start = (page - 1) * pageSize
       const pagedItems = [...items].slice(start, start + pageSize);
-      return ok({
-        items: [...pagedItems],
-        page: 1,
-        total_pages: 1,
-        total: items.length
-      });
+      return ok(pagedItems);
     }
 
     function deleteItem() {
