@@ -43,9 +43,6 @@
       <mat-spinner [diameter]="20"></mat-spinner> Loading More
     </div>
   </div>
-  <div class="paginator">
-    <mat-paginator [length]="totalItems" [pageSize]="PAGE_SIZE" (page)="setPage($event)"></mat-paginator>
-  </div>
 </div>
 <div class="loading" *ngIf="!items && !error">
   <mat-spinner></mat-spinner>
