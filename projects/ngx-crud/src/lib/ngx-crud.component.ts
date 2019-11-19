@@ -17,10 +17,7 @@ import {NgxCrudFormComponent} from './ngx-crud-form/ngx-crud-form.component';
 @Component({
   selector: 'ngx-crud-manager',
   templateUrl: './ngx-crud.component.html',
-  styleUrls: [
-    './ngx-crud.component.styl',
-    'styles/material.scss'],
-  encapsulation: ViewEncapsulation.None,
+  styleUrls: ['./ngx-crud.component.styl'],
   host: {class: 'ngx-crud'}
 })
 export class NgxCrudComponent implements OnInit, OnDestroy {
