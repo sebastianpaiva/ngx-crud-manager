@@ -30,7 +30,7 @@ Setup Angular Material Custom Theme (scss)
 
 ```
 @import '~@angular/material/theming';
-@import '~ngx-crud-manager/src/lib/styles/material;
+@import '~ngx-crud-manager/lib/theme;
 @include mat-core();
 $ngx-primary: mat-palette($mat-blue-grey);
 $ngx-accent:  mat-palette($mat-cyan, 500, 200, 900);
