@@ -1,5 +1,5 @@
 #!/bin/bash
-ng build ngx-crud && copy-files-from-to projects/ngx-crud/copy.json
+ng build ngx-crud && copy-files-from-to
 cd dist/ngx-crud
 npm publish
 ng build --prod sample
