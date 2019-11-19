@@ -1,0 +1,38 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../../ngx-crud/src/lib/styles/material";
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue.
+$ccar-primary: mat-palette($mat-blue-grey);
+$ccar-accent:  mat-palette($mat-cyan, 500, 200, 900);
+$ccar-dark-primary: mat-palette($mat-blue-grey, 500, 200, 900);
+$ccar-dark-accent:  mat-palette($mat-cyan, 500, 200, 900);
+// The warn palette is optional (defaults to red).
+$ccar-warn:    mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$ccar-theme: mat-light-theme($ccar-primary, $ccar-accent, $ccar-warn);
+$ccar-dark-theme: mat-dark-theme($ccar-dark-primary, $ccar-dark-accent, $ccar-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($ccar-theme);
+// Using the $theme variable from the pre-built theme you can call the theming function
+@include ngx-crud-theme($ccar-dark-theme);
+
+.cc-dark {
+  @include angular-material-theme($ccar-dark-theme);
+  @include ngx-crud-theme($ccar-dark-theme);
+}

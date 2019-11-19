@@ -1,13 +1,3 @@
-@import "colors.styl"
-[hidden]
-  display none!important
-:host
-  display flex
-  flex 1 1 auto
-  flex-direction column
-  background-color black
-  color rgba(white,0.85)
-  overflow auto
 .cdk-drag-preview
   box-sizing: border-box
   border-radius: 4px
@@ -18,136 +8,132 @@
   opacity: 0
 .cdk-drag-animating
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1)
-.item:last-child
-  border: none
-.items.cdk-drop-list-dragging .item:not(.cdk-drag-placeholder)
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1)
-.mat-button
-  min-width 60px
-.search
+.ngx-crud
   display flex
-  align-items center
-  cursor text
-  position relative
-  background rgba($white,0.2)
-  margin-right 5px
-  .fa
-    position absolute
-    top 50%
-    left 5px
-    transform translateY(-50%)
-  input
-    border none
-    outline none
-    background-color transparent
-    padding 5px
-    padding-left 25px
-    border-radius 5px
-    -webkit-appearance none
-    color white
-.load-more
-  display flex
-  align-items center
-  justify-content center
-  padding 1em
-  font-weight bold
-  mat-spinner
+  flex 1 1 auto
+  flex-direction column
+  overflow auto
+  //background-color black
+  //color rgba(white,0.85)
+  [hidden]
+    display none!important
+  .ngx-crud-item:last-child
+    border: none
+  .ngx-crud-items.cdk-drop-list-dragging .item:not(.cdk-drag-placeholder)
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1)
+  .mat-button
+    min-width 60px
+  .ngx-crud-search
+    display flex
+    align-items center
+    cursor text
+    position relative
+    //background rgba($white,0.2)
     margin-right 5px
-:hidden
-  display none
-.mat-card-avatar
-  display flex
-  align-items center
-  justify-content center
-.loading
-  padding 15px
-  display flex
-  align-items center
-  justify-content center
-.error
-  padding 15px
-  display flex
-  align-items center
-  justify-content center
-  color red
-  .fa
-    margin-right 10px
-.list
-  display flex
-  flex-direction column
-  flex 1 1 auto
-  border-radius 2px
-  position relative
-  overflow auto
-.defaults
-  margin-left 10px
-  color $primary
-  text-decoration underline
-.loading-overlay
-  position absolute
-  height 100%
-  width 100%
-  top 0
-  left 0
-  display flex
-  align-items center
-  justify-content center
-  background-color rgba($black,0.5)
-.wrapper
-  max-height 500px
-  overflow auto
-  display flex
-  flex-direction column
-  flex 1 1 auto
-.item
-  flex 0 0 auto
-  cursor pointer
-  background-color rgba($white,0.1)
-  display flex
-  .expander
-    flex 1 1 auto
-  &.last
-    border-bottom none
-  &.save
-    justify-content flex-end
-    background-color #424242
-    align-items center
-    min-height 35px
-    .hint
-      display flex
-      font-size 0.8em
-      padding-left 10px
-    &:hover
-      background-color rgba(#424242,1)
-  .editor, .content
-    padding 15px
-    flex 1 1 auto
-    display flex
-    align-items center
-  .content
-    padding 20px
-  .editor
-    padding-bottom 14px
-    input
-      outline none
-      -webkit-appearance none
-      background-color transparent
+    .fa
+      position absolute
+      top 50%
+      left 5px
+      transform translateY(-50%)
+    input.ngx-crud-input
       border none
-      color inherit
-      padding 4px
-      padding-left 5px
-      font inherit
-      border-bottom 1px dotted rgba($white,0.4)
-  .buttons
-    flex 0 0 auto
+      outline none
+      //background-color transparent
+      padding 5px
+      padding-left 25px
+      border-radius 5px
+      -webkit-appearance none
+  .ngx-crud-load-more
     display flex
-    .fa-pencil-alt
-      color $accent
-    .fa-check
-      color #00f100
-    .fa-times
-      color red
-    .fa-copy
-      color white
-  &:hover
-    background-color rgba($white,0.3)
+    align-items center
+    justify-content center
+    padding 1em
+    font-weight bold
+    mat-spinner
+      margin-right 5px
+  :hidden
+    display none
+  .mat-card-avatar
+    display flex
+    align-items center
+    justify-content center
+  .ngx-crud-loading
+    padding 15px
+    display flex
+    align-items center
+    justify-content center
+  .ngx-crud-error
+    padding 15px
+    display flex
+    align-items center
+    justify-content center
+    //color red
+    .fa
+      margin-right 10px
+  .ngx-crud-list
+    display flex
+    flex-direction column
+    flex 1 1 auto
+    border-radius 2px
+    position relative
+    overflow auto
+  .ngx-crud-defaults
+    margin-left 10px
+    //color $primary
+    text-decoration underline
+  .ngx-crud-loading-overlay
+    position absolute
+    height 100%
+    width 100%
+    top 0
+    left 0
+    display flex
+    align-items center
+    justify-content center
+    //background-color rgba($black,0.5)
+  .ngx-crud-wrapper
+    max-height 500px
+    overflow auto
+    display flex
+    flex-direction column
+    flex 1 1 auto
+  .ngx-crud-item
+    flex 0 0 auto
+    cursor pointer
+    //background-color rgba($white,0.1)
+    display flex
+    .ngx-crud-expander
+      flex 1 1 auto
+    &.ngx-crud-last
+      border-bottom none
+    &.ngx-crud-save
+      justify-content flex-end
+      //background-color #424242
+      align-items center
+      min-height 35px
+      .ngx-crud-hint
+        display flex
+        font-size 0.8em
+        padding-left 10px
+      &:hover
+        //background-color rgba(#424242,1)
+    .ngx-crud-editor, .ngx-crud-content
+      padding 15px
+      flex 1 1 auto
+      display flex
+      align-items center
+    .ngx-crud-content
+      padding 20px
+    .ngx-crud-buttons
+      flex 0 0 auto
+      display flex
+      .fa-pencil-alt
+        color #26C6DA
+      .fa-check
+        color #00f100
+      .fa-times
+        color red
+      .fa-copy
+        color white
+    &:hover
+      //background-color rgba($white,0.3)

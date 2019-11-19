@@ -16,4 +16,7 @@ body{
 h1{
   flex: 0 0 auto;
 }
+.mat-form-field{
+  min-width: 100%;
+}
 

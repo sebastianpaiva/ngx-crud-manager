@@ -1,4 +1,4 @@
-<div class="form cc-dark" *ngIf="formGroup && formTemplate">
+<div class="form" *ngIf="formGroup && formTemplate">
   <ng-container
     *ngTemplateOutlet="formTemplate; context: {form: formGroup, value: formValue}">
   </ng-container>

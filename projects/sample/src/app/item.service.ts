@@ -31,4 +31,7 @@ export class ItemService implements ICRUDService {
   restore(id) {
     return this.http.delete(this.apiUrl + '/items/' + id + '/restore', SetupParams());
   }
+  swap(ids) {
+    return this.http.post(this.apiUrl + '/items/swap', {ids}, SetupParams());
+  }
 }

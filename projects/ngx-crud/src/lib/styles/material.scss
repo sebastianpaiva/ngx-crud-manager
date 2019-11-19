@@ -1,47 +1,37 @@
 @import '~@angular/material/theming';
 @import '~@fortawesome/fontawesome-free/css/all.css';
 
-@include mat-core();
-
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue.
-$primary: mat-palette($mat-blue-grey);
-$accent:  mat-palette($mat-cyan, 500, 200, 900);
-$dark-primary: mat-palette($mat-cyan, 500, 200, 900);
-$dark-accent:  mat-palette($mat-orange, 800, 200, 900);
-// The warn palette is optional (defaults to red).
-$warn:    mat-palette($mat-red);
-
-// Create the theme object (a Sass map containing all of the palettes).
-$theme: mat-light-theme($primary, $accent, $warn);
-$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $warn);
-
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include angular-material-theme($theme);
-
-:host{
-  background-color: mat-color($mat-light-theme-background,background) !important;
-  color: mat-color($mat-light-theme-foreground,text) !important;
-  &.bordered{
-    border: 1px solid mat-color($mat-light-theme-foreground,slider-off);
+@mixin ngx-crud-theme($theme){
+  @include angular-material-theme($theme);
+  $primary: map-get($theme,primary);
+  $accent: map-get($theme,accent);
+  $text: map-get(map-get($theme,foreground),base);
+  $background: map-get(map-get($theme,background),background);
+  .ngx-background{
+    background-color: $background;
+    color: $text
   }
-  .wrapper{
-    border-bottom: 1px solid mat-color($mat-light-theme-foreground,slider-off);
+  .ngx-header{
+    background-color: mat-color($primary);
+    color: mat-color($primary,default-contrast);
   }
-  .item{
-    border-bottom: 1px solid mat-color($mat-light-theme-foreground,slider-off);
+  .ngx-crud-search, .ngx-crud-input{
+    color: black;
+  }
+  .ngx-crud-item{
+    border-bottom: 1px solid rgba($text,0.3);
     &.last{
-      border-bottom: none;
+      border-bottom: 0;
     }
   }
-  .save, .save:hover{
-    background-color:  mat-color($primary, default);
-    color: mat-color($mat-light-theme-foreground,text) !important;
-    .fa{
-      color: mat-color($accent,default) !important;
-    }
+  .ngx-crud-wrapper{
+    border: 1px solid rgba($text,0.3);
+    border-top: 0;
+    border-radius: 0 0 5px 5px;
+    color: $text;
+    background-color: $background;
   }
+
 }
+
+

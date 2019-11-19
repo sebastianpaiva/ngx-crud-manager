@@ -26,6 +26,19 @@ Add Angular Material (skip if you already installed it):
 
 `ng add @angular/material`
 
+Setup Angular Material Custom Theme (scss)
+
+```
+@import '~@angular/material/theming';
+@import '~ngx-crud-manager/src/lib/styles/material;
+@include mat-core();
+$ngx-primary: mat-palette($mat-blue-grey);
+$ngx-accent:  mat-palette($mat-cyan, 500, 200, 900);
+$ngx-warn:    mat-palette($mat-red);
+$ngx-theme: mat-light-theme($ngx-primary, $ngx-accent, $ngx-warn);
+@include ngx-crud-theme($ngx-theme);
+```
+
 ## Setup
 Just import the module to your app.module.ts
 

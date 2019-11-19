@@ -1,22 +1,22 @@
-<div class="list" *ngIf="items">
-  <div class="item save">
-    <span *ngIf="service.swap" class="hint">Arrastre para reordenar</span>
+<div class="ngx-crud-list" *ngIf="items">
+  <div class="ngx-crud-item ngx-crud-save ngx-header">
+    <span *ngIf="service.swap" class="ngx-crud-hint">Arrastre para reordenar</span>
     <button mat-button (click)="goBack()" *ngIf="args.length != 0"><i class="fa fa-arrow-left"></i></button>
-    <div class="expander"></div>
-    <div class="search">
+    <div class="ngx-crud-expander"></div>
+    <div class="ngx-crud-search">
       <i class="fa fa-search"></i>
-      <input [formControl]="formSearch">
+      <input [formControl]="formSearch" class="ngx-crud-input">
     </div>
-    <button mat-button color="primary" (click)="addItem()" *ngIf="formTemplate"><i class="fa fa-plus"></i></button>
-    <button mat-button color="primary" (click)="importDefaults()" *ngIf="service.import && !importing" ><i class="fa fa-cloud-download-alt"></i></button>
-    <button mat-button color="primary" *ngIf="importing" [matTooltip]="progress+'% - '+current+'/'+total"><i class="fa fa-spin fa-circle-notch"></i></button>
+    <button mat-button color="accent" (click)="addItem()" *ngIf="formTemplate"><i class="fa fa-plus"></i></button>
+    <button mat-button color="accent" (click)="importDefaults()" *ngIf="service.import && !importing" ><i class="fa fa-cloud-download-alt"></i></button>
+    <button mat-button color="accent" *ngIf="importing" [matTooltip]="progress+'% - '+current+'/'+total"><i class="fa fa-spin fa-circle-notch"></i></button>
   </div>
-  <div class="loading-overlay" [hidden]="!loadingPage">
+  <div class="ngx-crud-loading-overlay" [hidden]="!loadingPage">
     <mat-spinner></mat-spinner>
   </div>
-  <div class="wrapper items" cdkDropList (cdkDropListDropped)="drop($event)" #infiniteScroll>
-    <div class="item" *ngFor="let item of items; let index = index; let last = last" [class.last]="last" cdkDrag>
-      <div class="content dropable" [hidden]="item.editMode">
+  <div class="ngx-crud-wrapper ngx-crud-items" cdkDropList (cdkDropListDropped)="drop($event)" #infiniteScroll>
+    <div class="ngx-crud-item" *ngFor="let item of items; let index = index; let last = last" [class.last]="last" cdkDrag>
+      <div class="ngx-crud-content ngx-crud-dropable" [hidden]="item.editMode">
         <ng-template #defaultItemTemplate>
           {{item.name}}
         </ng-template>
@@ -24,29 +24,29 @@
           *ngTemplateOutlet="itemTemplate ? itemTemplate : defaultItemTemplate;context: {$implicit: item}">
         </ng-container>
       </div>
-      <div class="buttons">
-        <button class="button" mat-button color="warn" (click)="cloneItem(item)" [hidden]="item.saving || item.saved || item.error || item.deleted || !clone"><i class="fa fa-copy"></i></button>
-        <button class="button" mat-button color="warn" (click)="toggleEditMode(item)" [hidden]="item.saving || item.saved || item.error || item.deleted" *ngIf="service.update && formGroup"><i class="fa fa-pencil-alt"></i></button>
-        <button class="button" mat-button color="warn" (click)="destroyItem(item)" [hidden]="item.saving || item.saved || item.error || item.deleted" *ngIf="service.destroy"><i class="fa fa-trash"></i></button>
-        <button class="button" mat-button [hidden]="!item.saving"><i class="fa fa-spin fa-circle-notch"></i></button>
-        <button class="button" mat-button [hidden]="!item.saved"><i class="fa fa-check"></i></button>
-        <button class="button" mat-button [hidden]="!item.error"><i class="fa fa-times"></i></button>
-        <button class="button" mat-button [hidden]="item.saving || !item.deleted || item.error" (click)="restoreItem(item)" *ngIf="service.restore"><i class="fa fa-undo"></i></button>
+      <div class="ngx-crud-buttons">
+        <button class="ngx-crud-button" mat-button color="warn" (click)="cloneItem(item)" [hidden]="item.saving || item.saved || item.error || item.deleted || !clone"><i class="fa fa-copy"></i></button>
+        <button class="ngx-crud-button" mat-button color="warn" (click)="toggleEditMode(item)" [hidden]="item.saving || item.saved || item.error || item.deleted" *ngIf="service.update && formGroup"><i class="fa fa-pencil-alt"></i></button>
+        <button class="ngx-crud-button" mat-button color="warn" (click)="destroyItem(item)" [hidden]="item.saving || item.saved || item.error || item.deleted" *ngIf="service.destroy"><i class="fa fa-trash"></i></button>
+        <button class="ngx-crud-button" mat-button [hidden]="!item.saving"><i class="fa fa-spin fa-circle-notch"></i></button>
+        <button class="ngx-crud-button" mat-button [hidden]="!item.saved"><i class="fa fa-check"></i></button>
+        <button class="ngx-crud-button" mat-button [hidden]="!item.error"><i class="fa fa-times"></i></button>
+        <button class="ngx-crud-button" mat-button [hidden]="item.saving || !item.deleted || item.error" (click)="restoreItem(item)" *ngIf="service.restore"><i class="fa fa-undo"></i></button>
       </div>
     </div>
-    <div class="item last" *ngIf="items.length == 0">
-      <div class="content">
-        No items. <div class="defaults" (click)="importDefaults()" *ngIf="service.import">Import default values</div>
+    <div class="ngx-crud-item ngx-crud-last" *ngIf="items.length == 0">
+      <div class="ngx-crud-content">
+        No items. <div class="ngx-crud-defaults" (click)="importDefaults()" *ngIf="service.import">Import default values</div>
       </div>
     </div>
-    <div class="item load-more" [hidden]="!canLoadMore" #loadMore>
+    <div class="ngx-crud-item ngx-crud-load-more" [hidden]="!canLoadMore" #loadMore>
       <mat-spinner [diameter]="20"></mat-spinner> Loading More
     </div>
   </div>
 </div>
-<div class="loading" *ngIf="!items && !error">
+<div class="ngx-crud-loading" *ngIf="!items && !error">
   <mat-spinner></mat-spinner>
 </div>
-<div class="error" *ngIf="!items && error">
+<div class="ngx-crud-error" *ngIf="!items && error">
   <i class="fa fa-warning"></i> An unexpected error ocurred.
 </div>

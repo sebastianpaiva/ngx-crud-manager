@@ -1,17 +1,16 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild, ViewEncapsulation} from '@angular/core';
 import * as _ from 'lodash';
 import {ICRUDService, PagedResponse} from './crud.interface';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { PageEvent } from '@angular/material/paginator';
+import {MatDialog} from '@angular/material/dialog';
+import {PageEvent} from '@angular/material/paginator';
 import {interval, Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {moveItemInArray} from '@angular/cdk/drag-drop';
 import {NgxCrudImportComponent} from './ngx-crud-import/ngx-crud-import.component';
 import {first} from 'rxjs/operators';
 import {NgxCrudFormComponent} from './ngx-crud-form/ngx-crud-form.component';
-import {element} from 'protractor';
 // import {AngularFireDatabase} from '@angular/fire/database';
 // import {AdminService} from '../../services/admin.service';
 
@@ -20,7 +19,9 @@ import {element} from 'protractor';
   templateUrl: './ngx-crud.component.html',
   styleUrls: [
     './ngx-crud.component.styl',
-    'styles/material.scss']
+    'styles/material.scss'],
+  encapsulation: ViewEncapsulation.None,
+  host: {class: 'ngx-crud'}
 })
 export class NgxCrudComponent implements OnInit, OnDestroy {
   @ViewChild('infiniteScroll', {static: false}) infiniteScroll;
