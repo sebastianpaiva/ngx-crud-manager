@@ -1,0 +1,9 @@
+{
+  "filesToCopy": [
+    {
+      "from": "src/lib/styles/material.scss",
+      "to": "../../dist/ngx-crud/lib/theme.scss"
+    }
+  ],
+  "settings": {}
+}
