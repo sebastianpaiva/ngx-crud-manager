@@ -1,13 +1,4 @@
-.cdk-drag-preview
-  box-sizing: border-box
-  border-radius: 4px
-  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-    0 8px 10px 1px rgba(0, 0, 0, 0.14),
-    0 3px 14px 2px rgba(0, 0, 0, 0.12)
-.cdk-drag-placeholder
-  opacity: 0
-.cdk-drag-animating
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1)
+
 :host
   display flex
   flex 1 1 auto
@@ -15,125 +6,125 @@
   overflow auto
   //background-color black
   //color rgba(white,0.85)
-  [hidden]
-    display none!important
-  .ngx-crud-item:last-child
-    border: none
-  .ngx-crud-items.cdk-drop-list-dragging .item:not(.cdk-drag-placeholder)
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1)
-  .mat-button
-    min-width 60px
-  .ngx-crud-search
-    display flex
-    align-items center
-    cursor text
-    position relative
-    //background rgba($white,0.2)
-    margin-right 5px
-    .fa
-      position absolute
-      top 50%
-      left 5px
-      transform translateY(-50%)
-    input.ngx-crud-input
-      border none
-      outline none
-      //background-color transparent
-      padding 5px
-      padding-left 25px
-      border-radius 5px
-      -webkit-appearance none
-  .ngx-crud-load-more
-    display flex
-    align-items center
-    justify-content center
-    padding 1em
-    font-weight bold
-    mat-spinner
-      margin-right 5px
-  :hidden
-    display none
-  .mat-card-avatar
-    display flex
-    align-items center
-    justify-content center
-  .ngx-crud-loading
-    padding 15px
-    display flex
-    align-items center
-    justify-content center
-  .ngx-crud-error
-    padding 15px
-    display flex
-    align-items center
-    justify-content center
-    //color red
-    .fa
-      margin-right 10px
-  .ngx-crud-list
-    display flex
-    flex-direction column
-    flex 1 1 auto
-    border-radius 2px
-    position relative
-    overflow auto
-  .ngx-crud-defaults
-    margin-left 10px
-    //color $primary
-    text-decoration underline
-  .ngx-crud-loading-overlay
+[hidden]
+  display none!important
+.ngx-crud-item:last-child
+  border: none
+.ngx-crud-items.cdk-drop-list-dragging .item:not(.cdk-drag-placeholder)
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1)
+.mat-button
+  min-width 60px
+.ngx-crud-search
+  display flex
+  align-items center
+  cursor text
+  position relative
+  //background rgba($white,0.2)
+  margin-right 5px
+  .fa
     position absolute
-    height 100%
-    width 100%
-    top 0
-    left 0
+    top 50%
+    left 5px
+    transform translateY(-50%)
+  input.ngx-crud-input
+    border none
+    outline none
+    //background-color transparent
+    padding 5px
+    padding-left 25px
+    border-radius 5px
+    -webkit-appearance none
+.ngx-crud-load-more
+  display flex
+  align-items center
+  justify-content center
+  padding 1em
+  font-weight bold
+  mat-spinner
+    margin-right 5px
+:hidden
+  display none
+.mat-card-avatar
+  display flex
+  align-items center
+  justify-content center
+.ngx-crud-loading
+  padding 15px
+  display flex
+  align-items center
+  justify-content center
+.ngx-crud-error
+  padding 15px
+  display flex
+  align-items center
+  justify-content center
+  //color red
+  .fa
+    margin-right 10px
+.ngx-crud-list
+  display flex
+  flex-direction column
+  flex 1 1 auto
+  border-radius 2px
+  position relative
+  overflow auto
+.ngx-crud-defaults
+  margin-left 10px
+  //color $primary
+  text-decoration underline
+.ngx-crud-loading-overlay
+  position absolute
+  height 100%
+  width 100%
+  top 0
+  left 0
+  display flex
+  align-items center
+  justify-content center
+  //background-color rgba($black,0.5)
+.ngx-crud-wrapper
+  max-height 500px
+  overflow auto
+  display flex
+  flex-direction column
+  flex 1 1 auto
+.ngx-crud-item
+  flex 0 0 auto
+  cursor pointer
+  //background-color rgba($white,0.1)
+  display flex
+  .ngx-crud-expander
+    flex 1 1 auto
+  &.ngx-crud-last
+    border-bottom none
+  &.ngx-crud-save
+    justify-content flex-end
+    //background-color #424242
+    align-items center
+    min-height 35px
+    .ngx-crud-hint
+      display flex
+      font-size 0.8em
+      padding-left 10px
+    &:hover
+      //background-color rgba(#424242,1)
+  .ngx-crud-editor, .ngx-crud-content
+    padding 15px
+    flex 1 1 auto
     display flex
     align-items center
-    justify-content center
-    //background-color rgba($black,0.5)
-  .ngx-crud-wrapper
-    max-height 500px
-    overflow auto
-    display flex
-    flex-direction column
-    flex 1 1 auto
-  .ngx-crud-item
+  .ngx-crud-content
+    padding 20px
+  .ngx-crud-buttons
     flex 0 0 auto
-    cursor pointer
-    //background-color rgba($white,0.1)
     display flex
-    .ngx-crud-expander
-      flex 1 1 auto
-    &.ngx-crud-last
-      border-bottom none
-    &.ngx-crud-save
-      justify-content flex-end
-      //background-color #424242
-      align-items center
-      min-height 35px
-      .ngx-crud-hint
-        display flex
-        font-size 0.8em
-        padding-left 10px
-      &:hover
-        //background-color rgba(#424242,1)
-    .ngx-crud-editor, .ngx-crud-content
-      padding 15px
-      flex 1 1 auto
-      display flex
-      align-items center
-    .ngx-crud-content
-      padding 20px
-    .ngx-crud-buttons
-      flex 0 0 auto
-      display flex
-      .fa-pencil-alt
-        color #26C6DA
-      .fa-check
-        color #00f100
-      .fa-times
-        color red
-      .fa-copy
-        color white
-    &:hover
-      //background-color rgba($white,0.3)
+    .fa-pencil-alt
+      color #26C6DA
+    .fa-check
+      color #00f100
+    .fa-times
+      color red
+    .fa-copy
+      color white
+  &:hover
+    //background-color rgba($white,0.3)
