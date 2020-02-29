@@ -1,6 +1,6 @@
 {
   "name": "ngx-crud-manager",
-  "version": "1.0.25",
+  "version": "1.1.0",
   "author": "Sebastián Paiva",
   "license": "MIT",
   "keywords": [
@@ -14,13 +14,13 @@
     "url": "https://github.com/sebastianpaiva/ngx-crud-manager"
   },
   "peerDependencies": {
-    "@angular/common": ">= 6",
-    "@angular/core": ">= 6",
+    "@angular/common": ">= 9",
+    "@angular/core": ">= 9",
     "lodash": ">= 3",
     "rxjs": ">= 5",
-    "@angular/material": ">= 6",
-    "@angular/forms": ">= 6",
-    "@angular/cdk": ">= 6",
+    "@angular/material": ">= 9",
+    "@angular/forms": ">= 9",
+    "@angular/cdk": ">= 9",
     "@fortawesome/fontawesome-free": "^5.11.2"
   }
 }

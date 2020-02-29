@@ -21,8 +21,8 @@ import {NgxCrudFormComponent} from './ngx-crud-form/ngx-crud-form.component';
   host: {class: 'ngx-crud'}
 })
 export class NgxCrudComponent implements OnInit, OnDestroy {
-  @ViewChild('infiniteScroll', {static: false}) infiniteScroll;
-  @ViewChild('loadMore', {static: false}) loadMore;
+  @ViewChild('infiniteScroll') infiniteScroll;
+  @ViewChild('loadMore') loadMore;
   @Input() itemTemplate: TemplateRef<any>;
   @Input() formTemplate: TemplateRef<any>;
   @Input() service: ICRUDService;
