@@ -1,6 +1,10 @@
 import {NgModule} from '@angular/core';
 import { NgxCrudComponent } from './ngx-crud.component';
-import {MatButtonModule, MatDialogModule, MatPaginatorModule, MatProgressSpinnerModule, MatTooltipModule} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {NgxCrudFormComponent} from './ngx-crud-form/ngx-crud-form.component';
 import {NgxCrudImportComponent} from './ngx-crud-import/ngx-crud-import.component';

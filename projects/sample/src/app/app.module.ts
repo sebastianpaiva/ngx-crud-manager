@@ -8,7 +8,7 @@ import {RouterModule} from '@angular/router';
 import {fakeBackendProvider} from './fake-backend';
 import {NgxCrudModule} from '../../../ngx-crud/src/lib/ngx-crud.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatInput, MatInputModule} from '@angular/material';
+import { MatInput, MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
