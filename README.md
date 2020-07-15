@@ -26,17 +26,22 @@ Add Angular Material (skip if you already installed it):
 
 `ng add @angular/material`
 
-Setup Angular Material Custom Theme (scss)
+Add Angular Material Theme And FontAwesome (scss)
 
 ```
 @import '~@angular/material/theming';
-@import '~ngx-crud-manager/lib/theme;
+@import '~@fortawesome/fontawesome-free/css/all.css';
+```
+
+Adding Custom Material Theme
+```
+@import '~ngx-crud-manager/styles/theme;
 @include mat-core();
 $ngx-primary: mat-palette($mat-blue-grey);
 $ngx-accent:  mat-palette($mat-cyan, 500, 200, 900);
 $ngx-warn:    mat-palette($mat-red);
 $ngx-theme: mat-light-theme($ngx-primary, $ngx-accent, $ngx-warn);
-@include ngx-crud-theme($ngx-theme);
+@include ngx-crud-color($ngx-theme);
 ```
 
 ## Setup
