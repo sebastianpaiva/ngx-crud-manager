@@ -22,5 +22,8 @@
     "@angular/forms": ">= 9",
     "@angular/cdk": ">= 9",
     "@fortawesome/fontawesome-free": "^5.11.2"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
   }
 }
