@@ -1,6 +1,6 @@
 {
   "name": "ngx-crud-manager",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "author": "Sebastián Paiva",
   "license": "MIT",
   "keywords": [
@@ -21,7 +21,7 @@
     "@angular/material": ">= 9",
     "@angular/forms": ">= 9",
     "@angular/cdk": ">= 9",
-    "@fortawesome/fontawesome-free": "^5.11.2"
+    "@fortawesome/fontawesome-free": "> = 5"
   },
   "dependencies": {
     "tslib": "^2.0.0"

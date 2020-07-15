@@ -1,5 +1,4 @@
-@mixin ngx-crud-theme($theme){
-  @include angular-material-theme($theme);
+@mixin ngx-crud-color($theme){
   $primary: map-get($theme,primary);
   $accent: map-get($theme,accent);
   $text: map-get(map-get($theme,foreground),base);
