@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild, ViewEncapsulation} from '@angular/core';
-import * as _ from 'lodash';
 import {ICRUDService, PagedResponse} from './crud.interface';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
@@ -11,8 +10,7 @@ import {moveItemInArray} from '@angular/cdk/drag-drop';
 import {NgxCrudImportComponent} from './ngx-crud-import/ngx-crud-import.component';
 import {first} from 'rxjs/operators';
 import {NgxCrudFormComponent} from './ngx-crud-form/ngx-crud-form.component';
-// import {AngularFireDatabase} from '@angular/fire/database';
-// import {AdminService} from '../../services/admin.service';
+import {cloneDeep, merge} from "lodash-es";
 
 @Component({
   selector: 'ngx-crud-manager',
@@ -119,7 +117,7 @@ export class NgxCrudComponent implements OnInit, OnDestroy {
     if (this.formGroup) {
       this.formArray = new FormArray([]);
       for (const i of this.items) {
-        this.formArray.push(_.cloneDeep(this.formGroup));
+        this.formArray.push(cloneDeep(this.formGroup));
       }
       this.formArray.patchValue(this.items);
     }
@@ -160,7 +158,7 @@ export class NgxCrudComponent implements OnInit, OnDestroy {
   }
   createItem(value) {
     const index = this.items.push(value) - 1;
-    const saveItem = _.cloneDeep(value);
+    const saveItem = cloneDeep(value);
     this.toggleSaving(this.items[index]);
     this.service.create(saveItem, ...this.args).toPromise().then((response: HttpResponse<any>) => {
       this.toggleSaving(this.items[index]);
@@ -190,7 +188,7 @@ export class NgxCrudComponent implements OnInit, OnDestroy {
   updateItem(value, formValue) {
     this.toggleSaving(value);
     this.service.update(value.id, formValue, ...this.args).toPromise().then((response: HttpResponse<any | any[]>) => {
-      _.merge(value, response.body); // UPDATE VALUES
+      merge(value, response.body); // UPDATE VALUES
       this.toggleSaving(value);
       this.toggleSave(value);
     }).catch((error: HttpErrorResponse) => {
