@@ -30,7 +30,7 @@
     "@fortawesome/fontawesome-free": "^5.13.1",
     "lodash": "^4.17.19",
     "ngx-crud-manager": "^1.1.0",
-    "rxjs": "^6.5.5",
+    "rxjs": "^6.6.0",
     "tslib": "^1.13.0",
     "zone.js": "^0.10.3"
   },
