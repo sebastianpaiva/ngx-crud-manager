@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, HostListener, Inject, OnInit, TemplateRef} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {FormGroup} from '@angular/forms';
-import * as _ from 'lodash';
+import {cloneDeep} from "lodash-es";
 
 @Component({
   selector: 'ngx-crud-manager-form',
@@ -17,7 +17,7 @@ export class NgxCrudFormComponent implements OnInit {
     private matDialogRef: MatDialogRef<NgxCrudFormComponent>,
     private change: ChangeDetectorRef
   ) {
-    this.formGroup = _.cloneDeep(data.form);
+    this.formGroup = cloneDeep(data.form);
     this.formTemplate = data.template;
     this.formValue = data.value;
   }
