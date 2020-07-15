@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 @Component({
   selector: 'ngx-crud-manager-form',
   templateUrl: './ngx-crud-form.component.html',
-  styleUrls: ['./ngx-crud-form.component.styl', '../styles/material.scss']
+  styleUrls: ['./ngx-crud-form.component.styl', '../styles/theme.scss']
 })
 export class NgxCrudFormComponent implements OnInit {
   formTemplate: TemplateRef<any>;

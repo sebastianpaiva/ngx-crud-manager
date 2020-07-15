@@ -1,6 +1,7 @@
 #!/bin/bash
-ng build ngx-crud && copy-files-from-to
+ng build ngx-crud --prod
 cd dist/ngx-crud
 npm publish
+npm update --save
 ng build --prod sample
 firebase deploy

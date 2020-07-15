@@ -57,27 +57,6 @@ export class NgxCrudComponent implements OnInit, OnDestroy {
     if (!this.args || !Array.isArray(this.args)) {
       this.args = [];
     }
-    /*
-    const id = this.company.local$.getValue().id;
-    this.db.object('company/' + id + '/imports/' + this.service.model).valueChanges().subscribe((value: any) => {
-      let current = 0;
-      let total = 0;
-      for (const cid in value) {
-        if (value[cid] && value[cid].current !== value[cid].total) {
-          current += value[cid].current;
-          total += value[cid].total;
-        }
-      }
-      if (total !== 0) {
-        this.importing = true;
-        this.progress = Number.parseFloat((current / total * 100).toFixed(2));
-        this.current = current;
-        this.total = total;
-      }else {
-        this.importing = false;
-      }
-    });
-    */
     // SETUP SCROLLER
     this.loadMoreItems();
     if (!this.items) {

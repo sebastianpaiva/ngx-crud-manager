@@ -1,11 +1,8 @@
-
 :host
   display flex
   flex 1 1 auto
   flex-direction column
   overflow auto
-  //background-color black
-  //color rgba(white,0.85)
 [hidden]
   display none!important
 .ngx-crud-item:last-child
@@ -19,7 +16,6 @@
   align-items center
   cursor text
   position relative
-  //background rgba($white,0.2)
   margin-right 5px
   .fa
     position absolute
@@ -29,7 +25,6 @@
   input.ngx-crud-input
     border none
     outline none
-    //background-color transparent
     padding 5px
     padding-left 25px
     border-radius 5px
@@ -70,7 +65,6 @@
   overflow auto
 .ngx-crud-defaults
   margin-left 10px
-  //color $primary
   text-decoration underline
 .ngx-crud-loading-overlay
   position absolute
@@ -81,7 +75,6 @@
   display flex
   align-items center
   justify-content center
-  //background-color rgba($black,0.5)
 .ngx-crud-wrapper
   max-height 500px
   overflow auto
@@ -91,7 +84,6 @@
 .ngx-crud-item
   flex 0 0 auto
   cursor pointer
-  //background-color rgba($white,0.1)
   display flex
   .ngx-crud-expander
     flex 1 1 auto
@@ -99,15 +91,12 @@
     border-bottom none
   &.ngx-crud-save
     justify-content flex-end
-    //background-color #424242
     align-items center
     min-height 35px
     .ngx-crud-hint
       display flex
       font-size 0.8em
       padding-left 10px
-    &:hover
-      //background-color rgba(#424242,1)
   .ngx-crud-editor, .ngx-crud-content
     padding 15px
     flex 1 1 auto
@@ -126,5 +115,3 @@
       color red
     .fa-copy
       color white
-  &:hover
-    //background-color rgba($white,0.3)
